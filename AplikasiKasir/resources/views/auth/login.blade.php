@@ -24,7 +24,7 @@
         <br>
         <button type="submit">Login</button>
         <div class="register-link">
-            <p>Belum punya akun? <a href="register.blade.php">Register</a></p>
+            <p>Belum punya akun? <a href="register">Register</a></p>
         </div>
     </form>
 </body>
