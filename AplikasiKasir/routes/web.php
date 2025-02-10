@@ -21,8 +21,7 @@ Route::post('/register', [AuthController::class, 'register']);
 
 // Halaman dashboard (hanya untuk user yang sudah login)
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
+        Route::get('/dashboard', [ProdukController::class, 'index'])->name('dashboard');
     })->name('dashboard');
 
     // CRUD untuk data
@@ -30,7 +29,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('produk', ProdukController::class);
     Route::resource('penjualan', PenjualanController::class);
     Route::resource('detail-penjualan', DetailPenjualanController::class);
-});
 
 // Halaman khusus admin
 Route::middleware(['auth', 'role:admin'])->group(function () {

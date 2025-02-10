@@ -9,6 +9,7 @@ class ProdukController extends Controller
 {
     public function index()
     {
-        return view('produk.index', ['produk' => Produk::all()]);
+        $products = Produk::all(); // Ambil semua produk dari database
+        return view('dashboard', compact('products'));
     }
 }
