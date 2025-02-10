@@ -23,6 +23,9 @@
         <input type="password" name="password" required>
         <br>
         <button type="submit">Login</button>
+        <div class="register-link">
+            <p>Belum punya akun? <a href="register.blade.php">Register</a></p>
+        </div>
     </form>
 </body>
 </html>
