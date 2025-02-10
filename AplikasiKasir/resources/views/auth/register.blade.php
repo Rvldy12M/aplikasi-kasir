@@ -25,12 +25,6 @@
         <label>Password:</label>
         <input type="password" name="password" required>
         <br>
-        <label>Role:</label>
-        <select name="role" required>
-            <option value="admin">Admin</option>
-            <option value="petugas">Petugas</option>
-        </select>
-        <br>
         <button type="submit">Register</button>
     </form>
     @if(session('success'))

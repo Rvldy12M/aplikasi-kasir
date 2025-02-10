@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -21,14 +20,12 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-    
-        $user = User::where('email', $request->email)->first();
-    
-        if ($user && Hash::check($request->password, $user->password)) {
-            Auth::login($user);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
             return redirect()->intended('/dashboard');
         }
-    
+
         return back()->withErrors([
             'email' => 'Email atau password salah.',
         ])->onlyInput('email');
@@ -44,18 +41,18 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:3',
+            'role' => 'required|in:petugas',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password), // Simpan password dalam bentuk hash
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
         ]);
 
-        Auth::login($user); // Login otomatis setelah registrasi
-
-        return redirect('/dashboard')->with('success', 'Registrasi berhasil!');
+        return redirect('/login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 
     public function logout(Request $request)
