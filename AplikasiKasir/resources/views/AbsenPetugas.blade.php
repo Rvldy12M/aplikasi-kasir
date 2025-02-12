@@ -27,14 +27,11 @@
                     <button class="btn btn-danger">Absen</button>
                 </td>
                 <td>
-                    <form action="{{ route('absen.update', $employee->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <select name="status" class="form-control" onchange="this.form.submit()">
-                            <option value="present" {{ $employee->status == 'present' ? 'selected' : '' }}>Present</option>
-                            <option value="absen" {{ $employee->status == 'absen' ? 'selected' : '' }}>Absen</option>
-                        </select>
-                    </form>
+                    @if($employee->status == 'present')
+                        <button class="btn btn-success">Present</button>
+                    @else
+                        <button class="btn btn-danger">Absen</button>
+                    @endif
                 </td>
             </tr>
             @endforeach
