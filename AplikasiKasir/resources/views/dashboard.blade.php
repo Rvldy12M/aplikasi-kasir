@@ -6,37 +6,36 @@
     <title>Dashboard</title>
 </head>
 <body>
+<div class="sidebar">
     <h1>SmartKasir</h1>
+    <h2>{{ Auth::user()->name }}</h2>
+    <ul class="nav-links">
+        <li><a href="#" onclick="showContent('dashboard')">Dashboard</a></li>
+        <li><a href="#">Profile Petugas</a></li>
+        <li><a href="#">Settings</a></li>
+        <li>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit">LogOut</button>
+            </form>
+        </li>
+    </ul>
+</div>
 
-    <div>
-        <h2>{{ Auth::user()->name }}</h2> 
-    </div>
-
-    <div>
-        <ul class="nav-links">
-            <li><a href="#dashboard">Dashboard</a></li>
-            <li><a href="#profile">Profile Petugas</a></li>
-            <li><a href="#setting">Settings</a></li>
-            <li>
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit">LogOut</button>
-                </form>
-            </li>
-        </ul>
-    </div>
-
+<div class="main-content">
     <div id="dashboard">
-        <ul class="dashboard-menu">
-            <li><a href="#" onclick="showContent('produk')">Produk</a></li>
-            <li><a href="#" onclick="showContent('penjualan')">Penjualan</a></li>
-            <li><a href="#" onclick="showContent('transaksi')">Transaksi</a></li>
-            <li><a href="#" onclick="showContent('pelanggan')">Pelanggan</a></li>
-        </ul>
+        <div class="dashboard-menu">
+            <a href="#" onclick="showContent('produk')">Produk</a>
+            <a href="#" onclick="showContent('penjualan')">Penjualan</a>
+            <a href="#" onclick="showContent('transaksi')">Transaksi</a>
+            <a href="#" onclick="showContent('pelanggan')">Pelanggan</a>
+        </div>
+    </div>
 
-        <div id="produk" class="content active">
+    <div class="content">
+        <div id="produk" class="content-section active">
             <h3>Daftar Produk</h3>
-            <table border="1">
+            <table>
                 <tr>
                     <th>Nama Produk</th>
                     <th>Stok</th>
@@ -46,11 +45,48 @@
                 <tr>
                     <td>{{ $product->nama_produk }}</td>
                     <td>{{ $product->stok }}</td>
-                    <td>{{ number_format($product->harga, 0, '', '.') }}</td>
+                    <td>Rp{{ number_format($product->harga, 0, '', '.') }}</td>
+                </tr>
+                @endforeach
+            </table>
+        </div>
+
+        <div id="pelanggan" class="content-section">
+            <h3>Data Pelanggan</h3>
+            <table>
+                <tr>
+                    <th>Nama</th>
+                    <th>Alamat</th>
+                    <th>No Telp</th>
+                </tr>
+                @foreach ($pelanggans as $pelanggan)
+                <tr>
+                    <td>{{ $pelanggan->nama }}</td>
+                    <td>{{ $pelanggan->alamat }}</td>
+                    <td>{{ $pelanggan->nomor_telepon }}</td>
+                </tr>
+                @endforeach
+            </table>
+        </div>
+
+        <div id="penjualan" class="content-section">
+            <h3>Data Penjualan</h3>
+            <table>
+                <tr>
+                    <th>Tanggal</th>
+                    <th>Total Harga</th>
+                    <th>Pelanggan</th>
+                </tr>
+                @foreach ($penjualans as $penjualan)
+                <tr>
+                    <td>{{ $penjualan->tanggal_penjualan }}</td>
+                    <td>Rp{{ number_format($penjualan->total_harga, 0, '', '.') }}</td>
+                    <td>{{ $penjualan->pelanggan_id }}</td>
                 </tr>
                 @endforeach
             </table>
         </div>
     </div>
+</div>
 </body>
 </html>
