@@ -10,9 +10,9 @@
     <h1>SmartKasir</h1>
     <h2>{{ Auth::user()->name }}</h2>
     <ul class="nav-links">
-        <li><a href="#" onclick="showContent('dashboard')">Dashboard</a></li>
-        <li><a href="#">Profile Petugas</a></li>
-        <li><a href="#">Settings</a></li>
+    <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+    <li><a href="{{ route('AbsenPetugas') }}">Absen Petugas</a></li>
+        <li><a href="{{ route('Setting') }}">Settings</a></li>
         <li>
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
@@ -61,7 +61,7 @@
                 </tr>
                 @foreach ($pelanggans as $pelanggan)
                 <tr>
-                    <td>{{ $pelanggan->nama }}</td>
+                    <td>{{ $pelanggan->nama_pelanggan }}</td>
                     <td>{{ $pelanggan->alamat }}</td>
                     <td>{{ $pelanggan->nomor_telepon }}</td>
                 </tr>

@@ -7,6 +7,9 @@ use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\DetailPenjualanController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AbsenPetugasController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,17 +23,18 @@ Route::get('/register', [AuthController::class, 'registerForm'])->name('register
 Route::post('/register', [AuthController::class, 'register']);
 
 // Halaman dashboard (hanya untuk user yang sudah login)
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/absen-petugas', [AbsenPetugasController::class, 'index'])->name('AbsenPetugas');
+        Route::put('/absen-petugas/update/{id}', [AbsenPetugasController::class, 'update'])->name('absen.update');
+        
+    });
 
     // CRUD untuk data
     Route::resource('pelanggan', PelangganController::class);
     Route::resource('produk', ProdukController::class);
     Route::resource('penjualan', PenjualanController::class);
     Route::resource('detail-penjualan', DetailPenjualanController::class);
-});
 
 // Halaman khusus admin
 Route::middleware(['auth', 'role:admin'])->group(function () {

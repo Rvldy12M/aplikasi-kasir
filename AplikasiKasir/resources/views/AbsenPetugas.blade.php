@@ -1,15 +1,17 @@
 @extends('layouts.app')
 
+@section('title', 'Absen Petugas')
+
 @section('content')
 <div class="container">
     <h2 class="text-primary">Employee Absence</h2>
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>id</th>
+                <th>ID</th>
                 <th>Name</th>
-                <th>email</th>
-                <th>info</th>
+                <th>Email</th>
+                <th>Info</th>
                 <th>Detail</th>
             </tr>
         </thead>
