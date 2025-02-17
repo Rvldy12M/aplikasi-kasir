@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Penjualan</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
     <h1>Tambah Penjualan</h1>
+    
     <form action="{{ route('penjualan.store') }}" method="POST">
         @csrf
-        <label for="produk_id">Pilih Produk:</label>
-        <select name="produk_id" id="produk_id" required>
-            @foreach ($produk as $prod)
-                <option value="{{ $prod->id }}">{{ $prod->nama_produk }}</option>
-            @endforeach
-        </select><br><br>
+
+        <!-- Tanggal Penjualan -->
+        <label for="tanggal">Tanggal Penjualan:</label>
+        <input type="date" name="tanggal" id="tanggal" required value="{{ date('Y-m-d') }}"><br><br>
 
         <label for="member_id">Pilih Member (opsional):</label>
         <select name="member_id" id="member_id">
@@ -24,10 +19,67 @@
             @endforeach
         </select><br><br>
 
-        <label for="jumlah">Jumlah:</label>
-        <input type="number" name="jumlah" id="jumlah" required min="1"><br><br>
+        <!-- Produk (Bisa Menambah Banyak Produk) -->
+        <div id="produk-container">
+            <div class="produk-item">
+                <label for="produk_id">Produk:</label>
+                <select name="produk_id[]" class="produk-select" required>
+                    @foreach ($produk as $prod)
+                        <option value="{{ $prod->id }}" data-harga="{{ $prod->harga }}">{{ $prod->nama_produk }}</option>
+                    @endforeach
+                </select>
+                
+                <label>Jumlah:</label>
+                <input type="number" name="jumlah[]" class="jumlah-input" min="1" value="1" required>
+            </div>
+        </div>
 
-        <button type="submit">Tambah Penjualan</button>
+        <button type="button" id="tambah-produk">Tambah Produk</button><br><br>
+
+        <!-- Total Harga -->
+        <label for="total_harga">Total Harga:</label>
+        <input type="text" id="total_harga" name="total_harga" readonly><br><br>
+
+        <button type="submit">Simpan</button>
     </form>
-</body>
-</html>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const produkContainer = document.getElementById("produk-container");
+        const tambahProdukBtn = document.getElementById("tambah-produk");
+        const totalHargaInput = document.getElementById("total_harga");
+
+        function hitungTotalHarga() {
+            let total = 0;
+            document.querySelectorAll(".produk-item").forEach(item => {
+                const harga = item.querySelector(".produk-select").selectedOptions[0].dataset.harga;
+                const jumlah = item.querySelector(".jumlah-input").value;
+                total += harga * jumlah;
+            });
+            totalHargaInput.value = total.toLocaleString("id-ID", { minimumFractionDigits: 2 });
+        }
+
+        tambahProdukBtn.addEventListener("click", function () {
+            const itemBaru = document.querySelector(".produk-item").cloneNode(true);
+            itemBaru.querySelector(".jumlah-input").value = "1";
+            produkContainer.appendChild(itemBaru);
+        });
+
+        produkContainer.addEventListener("click", function (e) {
+            if (e.target.classList.contains("hapus-produk")) {
+                e.target.parentElement.remove();
+                hitungTotalHarga();
+            }
+        });
+
+        produkContainer.addEventListener("input", function (e) {
+            if (e.target.classList.contains("jumlah-input") || e.target.classList.contains("produk-select")) {
+                hitungTotalHarga();
+            }
+        });
+
+        hitungTotalHarga();
+    });
+</script>
+@endsection
