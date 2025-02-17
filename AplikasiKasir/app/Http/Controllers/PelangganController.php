@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -9,8 +8,8 @@ class PelangganController extends Controller
 {
     public function index()
     {
-        $pelanggan = Pelanggan::all();
-        return view('pelanggan.index', compact('pelanggan'));
+        $pelanggans = Pelanggan::all();
+        return view('pelanggan.index', compact('pelanggans'));
     }
 
     public function create()
@@ -23,16 +22,16 @@ class PelangganController extends Controller
         $request->validate([
             'nama_pelanggan' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
-            'nomer_telepon' => 'required|string|max:255'
+            'nomor_telepon' => 'required|string|max:255'
         ]);
 
         Pelanggan::create([
             'nama_pelanggan' => $request->nama_pelanggan,
             'alamat' => $request->alamat,
-            'nomer_telepon' => $request->nomor_telepon
+            'nomor_telepon' => $request->nomor_telepon
         ]);
 
-        return redirect()->route('pelanggan,index')->width('message', 'Pelanggan berhasil ditambahkan!');
+        return redirect()->route('pelanggan.index')->with('message', 'Pelanggan berhasil ditambahkan!');
     }
 
     public function show($id)
@@ -50,19 +49,19 @@ class PelangganController extends Controller
     public function update(Request $request, $id)
     {
         $pelanggan = Pelanggan::findOrFail($id);
- 
+
         $request->validate([
             'nama_pelanggan' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
-            'nomer_telepon' => 'required|string|max:255'
+            'nomor_telepon' => 'required|string|max:255'
         ]);
 
-        Pelanggan::update([
+        $pelanggan->update([
             'nama_pelanggan' => $request->nama_pelanggan,
             'alamat' => $request->alamat,
-            'nomer_telepon' => $request->nomor_telepon
+            'nomor_telepon' => $request->nomor_telepon
         ]);
 
-        return redirect()->route('pelanggan,index')->width('message', 'Pelanggan berhasil diperbarui!');
+        return redirect()->route('pelanggan.index')->with('message', 'Pelanggan berhasil diperbarui!');
     }
 }

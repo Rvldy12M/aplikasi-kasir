@@ -36,13 +36,15 @@ Route::post('/register', [AuthController::class, 'register']);
 });
 
     // CRUD untuk data
-    Route::resource('pelanggan', PelangganController::class);    Route::get('/pelanggan', [PelangganController::class, 'index'])->name('pelanggan.index');
+    Route::resource('pelanggan', 'App\Http\Controllers\PelangganController');
+    Route::get('/pelanggan', [PelangganController::class, 'index'])->name('pelanggan.index');
     Route::delete('/pelanggan/{id}', [PelangganController::class, 'destroy'])->name('pelanggan.destroy');
     Route::get('/pelanggan/create', [PelangganController::class, 'create'])->name('pelanggan.create');
     Route::put('/pelanggan/{id}', [PelangganController::class, 'update'])->name('pelanggan.update');
     Route::post('/pelanggan', [PelangganController::class, 'store'])->name('pelanggan.store');
     Route::get('/pelanggan/{pelanggan}', [PelangganController::class, 'show'])->name('pelanggan.show');
     Route::get('/pelanggan/{id}/edit', [PelangganController::class, 'edit'])->name('pelanggan.edit');
+
     //Route Produk
     Route::resource('produk', ProdukController::class);
     Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');

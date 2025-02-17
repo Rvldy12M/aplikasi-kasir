@@ -4,7 +4,7 @@
 <div class="container">
     <h3>Daftar Pelanggan</h3>
 
-    <a href="{{ route('pelanggan.create') }}" class="btn btn_primary">Tambah Pelanggan</a>
+    <a href="{{ route('pelanggan.create') }}" class="btn btn-primary">Tambah Pelanggan</a>
 
     @if(session('message'))
     <p class="alert alert-success">{{ session('message') }}</p>
@@ -26,11 +26,11 @@
             <td>{{ $pelanggan->alamat }}</td>
             <td>{{ $pelanggan->nomor_telepon }}</td>
             <td>
-            <a href="{{ route('pelanggan.show', $p->id) }}" class="btn btn-info btn-sm">Lihat</a>
-            <a href="{{ route('pelanggan.edit', $p->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{{ route('pelanggan.show', $pelanggan->id) }}" class="btn btn-info btn-sm">Lihat</a>
+                <a href="{{ route('pelanggan.edit', $pelanggan->id) }}" class="btn btn-warning btn-sm">Edit</a>
             </td>
         </tr>
         @endforeach
-</table>
+    </table>
 </div>
 @endsection
