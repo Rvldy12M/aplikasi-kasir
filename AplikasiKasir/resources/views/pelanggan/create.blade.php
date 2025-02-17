@@ -8,13 +8,13 @@
         @csrf
 
         <label>Nama:</label>
-        <input type="text" name="nama" class="form-control" required>
+        <input type="text" name="nama_pelanggan" class="form-control" required>
 
-        <label>Email:</label>
-        <input type="email" name="email" class="form-control" required>
+        <label>Alamat:</label>
+        <input type="text" name="alamat" class="form-control" required>
 
         <label>Telepon:</label>
-        <input type="text" name="telepon" class="form-control" required>
+        <input type="text" name="nomor_telepon" class="form-control" required>
 
         <button type="submit" class="btn btn-success mt-3">Simpan</button>
     </form>
