@@ -64,4 +64,5 @@ public function show($id)
 
         return redirect()->route('penjualan.index')->with('message', 'Penjualan berhasil dibuat!');
     }
+
 }
