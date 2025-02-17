@@ -26,7 +26,7 @@
     <div id="dashboard">
         <div class="dashboard-menu">
             <a href="{{ route('produk.index') }}">Produk</a>
-            <a href="#" onclick="showContent('penjualan')">Penjualan</a>
+            <a href="{{ route('penjualan.index') }}" onclick="showContent('penjualan')">Penjualan</a>
             <a href="{{ route('pelanggan.index') }}" onclick="showContent('pelanggan')">Pelanggan</a>
         </div>
     </div>
