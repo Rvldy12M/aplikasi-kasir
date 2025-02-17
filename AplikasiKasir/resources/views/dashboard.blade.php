@@ -25,66 +25,10 @@
 <div class="main-content">
     <div id="dashboard">
         <div class="dashboard-menu">
-            <a href="#" onclick="showContent('produk')">Produk</a>
+            <a href="{{ route('produk.index') }}">Produk</a>
             <a href="#" onclick="showContent('penjualan')">Penjualan</a>
             <a href="#" onclick="showContent('transaksi')">Transaksi</a>
             <a href="#" onclick="showContent('pelanggan')">Pelanggan</a>
-        </div>
-    </div>
-
-    <div class="content">
-        <div id="produk" class="content-section active">
-            <h3>Daftar Produk</h3>
-            <table>
-                <tr>
-                    <th>Nama Produk</th>
-                    <th>Stok</th>
-                    <th>Harga</th>
-                </tr>
-                @foreach ($products as $product)
-                <tr>
-                    <td>{{ $product->nama_produk }}</td>
-                    <td>{{ $product->stok }}</td>
-                    <td>Rp{{ number_format($product->harga, 0, '', '.') }}</td>
-                </tr>
-                @endforeach
-            </table>
-        </div>
-
-        <div id="pelanggan" class="content-section">
-            <h3>Data Pelanggan</h3>
-            <table>
-                <tr>
-                    <th>Nama</th>
-                    <th>Alamat</th>
-                    <th>No Telp</th>
-                </tr>
-                @foreach ($pelanggans as $pelanggan)
-                <tr>
-                    <td>{{ $pelanggan->nama_pelanggan }}</td>
-                    <td>{{ $pelanggan->alamat }}</td>
-                    <td>{{ $pelanggan->nomor_telepon }}</td>
-                </tr>
-                @endforeach
-            </table>
-        </div>
-
-        <div id="penjualan" class="content-section">
-            <h3>Data Penjualan</h3>
-            <table>
-                <tr>
-                    <th>Tanggal</th>
-                    <th>Total Harga</th>
-                    <th>Pelanggan</th>
-                </tr>
-                @foreach ($penjualans as $penjualan)
-                <tr>
-                    <td>{{ $penjualan->tanggal_penjualan }}</td>
-                    <td>Rp{{ number_format($penjualan->total_harga, 0, '', '.') }}</td>
-                    <td>{{ $penjualan->pelanggan_id }}</td>
-                </tr>
-                @endforeach
-            </table>
         </div>
     </div>
 </div>
