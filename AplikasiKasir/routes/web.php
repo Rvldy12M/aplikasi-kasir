@@ -43,6 +43,7 @@ Route::post('/register', [AuthController::class, 'register']);
     Route::post('/pelanggan', [PelangganController::class, 'store'])->name('pelanggan.store');
     Route::get('/pelanggan/{pelanggan}', [PelangganController::class, 'show'])->name('pelanggan.show');
     Route::get('/pelanggan/{id}/edit', [PelangganController::class, 'edit'])->name('pelanggan.edit');
+
     //Route Produk
     Route::resource('produk', ProdukController::class);
     Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
@@ -53,6 +54,7 @@ Route::post('/register', [AuthController::class, 'register']);
     Route::get('/produk/{produk}', [ProdukController::class, 'show'])->name('produk.show');
     Route::get('/produk/{id}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
 
+    //penjualan
     Route::resource('penjualan', PenjualanController::class);
     Route::resource('detail-penjualan', DetailPenjualanController::class);
 
