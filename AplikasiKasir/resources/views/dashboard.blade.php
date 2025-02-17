@@ -12,7 +12,7 @@
     <ul class="nav-links">
     <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
     <li><a href="{{ route('AbsenPetugas') }}">Absen Petugas</a></li>
-        <li><a href="{{ route('settings') }}">Settings</a></li>
+        <li><a href="{{ route('settings') }}">Setting</a></li>
         <li>
             <form action="{{ route('logout') }}" method="POST">
                 @csrf

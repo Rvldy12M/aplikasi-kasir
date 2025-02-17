@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Daftar Penjualan</h1>
 
+    <h1>Daftar Penjualan</h1>
+    <a href="{{ route('penjualan.create') }}">Tambah Penjualan</a>
+    <hr>
     @if(session('message'))
         <div>{{ session('message') }}</div>
     @endif
@@ -31,6 +33,4 @@
             @endforeach
         </tbody>
     </table>
-    
-    <a href="{{ route('penjualan.create') }}">Tambah Penjualan</a>
 @endsection
