@@ -15,8 +15,7 @@
         <nav>
             <ul>
                 <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                <li><a href="{{ route('absen.update', $employee->id) }}" method="POST"> </a>Absen Petugas</li>
-                <li><a href="#">Profile</a></li>
+                <li><a href="#">Setting</a></li>
                 <li>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
