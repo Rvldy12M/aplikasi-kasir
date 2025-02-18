@@ -9,5 +9,7 @@ class Pelanggan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama', 'email', 'telepon', 'alamat'];
+    protected $table = 'pelanggans'; // Sesuaikan dengan nama tabel di database
+
+    protected $fillable = ['nama_pelanggan', 'alamat', 'nomor_telepon']; // Pastikan ini sesuai dengan kolom di tabel
 }

@@ -2,11 +2,12 @@
 @section('content')
 <div class="container">
     <h2>Edit Produk</h2>
-    <form action="{{ route('produk.update', $produk->id) }}" method="POST" enctype="multipart/form-data">
-        @csrf @method('PUT')
+    <form action="{{ route('produk.update', $produk->id) }}" method="POST">
+        @csrf
+        @method('PUT')
 
         <label>Nama Produk:</label>
-        <input type="text" name="nama" value="{{ $produk->nama_produk }}" required>
+        <input type="text" name="nama_produk" value="{{ $produk->nama_produk }}" required>
 
         <label>Harga:</label>
         <input type="number" name="harga" value="{{ $produk->harga }}" required>
@@ -18,4 +19,3 @@
     </form>
 </div>
 @endsection
-   

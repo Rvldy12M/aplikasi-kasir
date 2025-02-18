@@ -9,13 +9,13 @@
         @method('PUT')
 
         <label>Nama:</label>
-        <input type="text" name="nama" class="form-control" value="{{ $pelanggan->nama_pelanggan }}" required>
+        <input type="text" name="nama_pelanggan" class="form-control" value="{{ $pelanggan->nama_pelanggan }}" required>
 
         <label>Alamat:</label>
-        <input type="text" name="text" class="form-control" value="{{ $pelanggan->alamat }}" required>
+        <input type="text" name="alamat" class="form-control" value="{{ $pelanggan->alamat }}" required>
 
         <label>Telepon:</label>
-        <input type="text" name="telepon" class="form-control" value="{{ $pelanggan->nomor_telepon }}" required>
+        <input type="text" name="nomor_telepon" class="form-control" value="{{ $pelanggan->nomor_telepon }}" required>
 
         <button type="submit" class="btn btn-success mt-3">Update</button>
     </form>

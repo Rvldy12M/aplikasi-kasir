@@ -37,7 +37,8 @@ Route::post('/register', [AuthController::class, 'register']);
 });
 
     // CRUD untuk data
-    Route::resource('pelanggan', PelangganController::class);    Route::get('/pelanggan', [PelangganController::class, 'index'])->name('pelanggan.index');
+    Route::resource('pelanggan', 'App\Http\Controllers\PelangganController');
+    Route::get('/pelanggan', [PelangganController::class, 'index'])->name('pelanggan.index');
     Route::delete('/pelanggan/{id}', [PelangganController::class, 'destroy'])->name('pelanggan.destroy');
     Route::get('/pelanggan/create', [PelangganController::class, 'create'])->name('pelanggan.create');
     Route::put('/pelanggan/{id}', [PelangganController::class, 'update'])->name('pelanggan.update');
