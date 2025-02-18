@@ -7,7 +7,7 @@ use App\Models\User;
 
 class AbsenController extends Controller
 {
-    // Menampilkan daftar petugas yang bisa absen
+    // Menampilkan daftar petugas yang bisa ae gitbsen
     public function index()
     {
         $employees = User::where('role', 'petugas')->get();
