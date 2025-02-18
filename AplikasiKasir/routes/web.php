@@ -60,8 +60,8 @@ Route::post('/register', [AuthController::class, 'register']);
     Route::resource('detail-penjualan', DetailPenjualanController::class);
 
 
-Route::get('/absen-petugas', [AbsenPetugasController::class, 'index'])->name('AbsenPetugas');
-Route::put('/absen-petugas/update/{id}', [AbsenPetugasController::class, 'update'])->name('absen.update');
+Route::get('/absen-petugas', [AbsenController::class, 'index'])->name('AbsenPetugas');
+Route::put('/absen-petugas/update/{id}', [AbsenController::class, 'update'])->name('absen.update');
 
 // Halaman khusus admin
 Route::middleware(['auth', 'role:admin'])->group(function () {
