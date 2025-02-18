@@ -8,7 +8,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\DetailPenjualanController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\AbsenPetugasController;
+use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\SettingsController;
 
 
@@ -26,8 +26,9 @@ Route::post('/register', [AuthController::class, 'register']);
 // Halaman dashboard (hanya untuk user yang sudah login)
     Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        Route::get('/absen-petugas', [AbsenPetugasController::class, 'index'])->name('AbsenPetugas');
-        Route::put('/absen-petugas/update/{id}', [AbsenPetugasController::class, 'update'])->name('absen.update');
+        Route::get('/absen', [AbsenController::class, 'index'])->name('AbsenPetugas');
+        Route::put('/absen/{id}', [AbsenController::class, 'update'])->name('absen.update');
+        Route::delete('/absen/{id}', [AbsenController::class, 'destroy'])->name('absen.delete'); // Hapus absen (admin)
 
  // Rute Settings
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
