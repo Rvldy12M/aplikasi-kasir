@@ -11,5 +11,5 @@ class Member extends Model
 
     protected $table = 'members'; // Sesuaikan dengan nama tabel
 
-    protected $fillable = ['nama', 'email', 'telepon']; // Sesuaikan dengan kolom di tabel
+    protected $fillable = ['nama', 'nomor_telepon', 'alamat', 'tanggal_daftar']; // Sesuaikan dengan kolom di tabel
 }

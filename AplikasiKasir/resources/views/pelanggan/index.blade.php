@@ -10,7 +10,7 @@
     <p class="alert alert-success">{{ session('message') }}</p>
     @endif
 
-    <table class="table table-bordered">
+    <table border="1">
         <tr>
             <th>ID</th>
             <th>Nama Pelanggan</th>
@@ -28,6 +28,11 @@
             <td>
                 <a href="{{ route('pelanggan.show', $pelanggan->id) }}" class="btn btn-info btn-sm">Lihat</a>
                 <a href="{{ route('pelanggan.edit', $pelanggan->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                <form action="{{ route('pelanggan.destroy', $pelanggan->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                </form>
             </td>
         </tr>
         @endforeach

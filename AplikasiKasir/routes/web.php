@@ -54,6 +54,7 @@ Route::post('/register', [AuthController::class, 'register']);
     Route::post('/produk', [ProdukController::class, 'store'])->name('produk.store');
     Route::get('/produk/{produk}', [ProdukController::class, 'show'])->name('produk.show');
     Route::get('/produk/{id}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
+    Route::get('/count-produk', [ProdukController::class, 'countProduk']);
 
     //penjualan
     Route::resource('penjualan', PenjualanController::class);

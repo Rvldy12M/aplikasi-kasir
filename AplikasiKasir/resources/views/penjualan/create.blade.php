@@ -11,7 +11,7 @@
         <label for="tanggal">Tanggal Penjualan:</label>
         <input type="date" name="tanggal" id="tanggal" required value="{{ date('Y-m-d') }}"><br><br>
 
-        <label for="member_id">Pilih Member (opsional):</label>
+        <label for="member_id">Pilih Member:</label>
         <select name="member_id" id="member_id">
             <option value="">Tidak ada</option>
             @foreach ($members as $member)
