@@ -9,11 +9,13 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    // Menampilkan Form Login
     public function loginForm()
     {
         return view('auth.login');
     }
 
+    // Proses Login
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -31,28 +33,31 @@ class AuthController extends Controller
         ])->onlyInput('email');
     }
 
+    // Menampilkan Form Registrasi
     public function registerForm()
     {
         return view('auth.register');
     }
 
+    // Proses Registrasi
     public function register(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:3',
+            'password' => 'required|min:8',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
         ]);
 
         return redirect('/login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 
+    // Proses Logout
     public function logout(Request $request)
     {
         Auth::logout();

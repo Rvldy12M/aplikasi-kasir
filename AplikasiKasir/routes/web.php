@@ -31,9 +31,13 @@ Route::post('/register', [AuthController::class, 'register']);
         Route::delete('/absen/{id}', [AbsenController::class, 'destroy'])->name('absen.delete'); // Hapus absen (admin)
 
  // Rute Settings
-    Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
-    Route::post('/settings/change-password', [SettingsController::class, 'changePassword'])->name('settings.changePassword');
-    Route::post('/settings/upload-profile', [SettingsController::class, 'uploadProfile'])->name('settings.uploadProfile');
+ Route::middleware('auth')->group(function () {
+     Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
+     Route::post('/settings/change-password', [SettingsController::class, 'changePassword'])->name('settings.changePassword');
+     Route::post('/settings/upload-profile', [SettingsController::class, 'uploadProfile'])->name('settings.uploadProfile');
+ });
+ 
+    
 });
 
     // CRUD untuk data
@@ -62,8 +66,8 @@ Route::post('/register', [AuthController::class, 'register']);
     Route::resource('detail-penjualan', DetailPenjualanController::class);
 
 
-Route::get('/absen-petugas', [AbsenPetugasController::class, 'index'])->name('AbsenPetugas');
-Route::put('/absen-petugas/update/{id}', [AbsenPetugasController::class, 'update'])->name('absen.update');
+Route::get('/absen-petugas', [AbsenController::class, 'index'])->name('AbsenPetugas');
+Route::put('/absen-petugas/update/{id}', [AbsenController::class, 'update'])->name('absen.update');
 
 // Halaman khusus admin
 Route::middleware(['auth', 'role:admin'])->group(function () {
