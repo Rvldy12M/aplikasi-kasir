@@ -16,7 +16,7 @@
             <ul>
                 <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                 <li><a href="{{ route('AbsenPetugas') }}">Absen Petugas</a></li>
-                <li><a href="#">Setting</a></li>
+                <li><a href="{{ route('AbsenPetugas') }}">Setting</a></li>
                 <li>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf

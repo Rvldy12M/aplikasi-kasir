@@ -1,85 +1,80 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>Tambah Penjualan</h1>
-    
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tambah Penjualan</title>
+    <script>
+        let produkData = @json($produk);
+
+        function tambahProduk() {
+            let produkList = document.getElementById('produk-list');
+            let produkItem = document.createElement('div');
+            produkItem.classList.add('produk-item');
+
+            produkItem.innerHTML = `
+                <select name="produk_id[]" class="produk-select" onchange="hitungTotal()" required>
+                    <option value="">-- Pilih Produk --</option>
+                    @foreach($produk as $p)
+                        <option value="{{ $p->id }}" data-harga="{{ $p->harga }}">{{ $p->nama_produk }}</option>
+                    @endforeach
+                </select>
+                <input type="number" name="jumlah[]" class="jumlah-input" placeholder="Jumlah" min="1" required oninput="hitungTotal()">
+                <button type="button" onclick="this.parentNode.remove(); hitungTotal()">Hapus</button>
+            `;
+
+            produkList.appendChild(produkItem);
+        }
+
+        function hitungTotal() {
+            let totalHarga = 0;
+            let produkSelects = document.querySelectorAll('.produk-select');
+            let jumlahInputs = document.querySelectorAll('.jumlah-input');
+
+            produkSelects.forEach((select, index) => {
+                let harga = select.options[select.selectedIndex].getAttribute('data-harga') || 0;
+                let jumlah = jumlahInputs[index].value || 0;
+                totalHarga += parseInt(harga) * parseInt(jumlah);
+            });
+
+            document.getElementById('total-harga').innerText = `Total Harga: Rp${totalHarga.toLocaleString('id-ID')}`;
+        }
+    </script>
+</head>
+<body>
+    <h2>Tambah Penjualan</h2>
     <form action="{{ route('penjualan.store') }}" method="POST">
         @csrf
 
-        <!-- Tanggal Penjualan -->
-        <label for="tanggal">Tanggal Penjualan:</label>
-        <input type="date" name="tanggal" id="tanggal" required value="{{ date('Y-m-d') }}"><br><br>
+        <label for="tanggal_penjualan">Tanggal Penjualan:</label>
+        <input type="date" name="tanggal_penjualan" required>
 
-        <label for="member_id">Pilih Member:</label>
-        <select name="member_id" id="member_id">
-            <option value="">Tidak ada</option>
-            @foreach ($members as $member)
-                <option value="{{ $member->id }}">{{ $member->nama }}</option>
+        <label for="pelanggan">Pelanggan:</label>
+        <select name="pelanggan_id">
+            <option value="">-- Tidak Diketahui --</option>
+            @foreach($pelanggan as $p)
+                <option value="{{ $p->id }}">{{ $p->nama_pelanggan }}</option>
             @endforeach
-        </select><br><br>
+        </select>
 
-        <!-- Produk (Bisa Menambah Banyak Produk) -->
-        <div id="produk-container">
+        <label for="produk">Produk:</label>
+        <div id="produk-list">
             <div class="produk-item">
-                <label for="produk_id">Produk:</label>
-                <select name="produk_id[]" class="produk-select" required>
-                    @foreach ($produk as $prod)
-                        <option value="{{ $prod->id }}" data-harga="{{ $prod->harga }}">{{ $prod->nama_produk }}</option>
+                <select name="produk_id[]" class="produk-select" onchange="hitungTotal()" required>
+                    <option value="">-- Pilih Produk --</option>
+                    @foreach($produk as $p)
+                        <option value="{{ $p->id }}" data-harga="{{ $p->harga }}">{{ $p->nama_produk }}</option>
                     @endforeach
                 </select>
-                
-                <label>Jumlah:</label>
-                <input type="number" name="jumlah[]" class="jumlah-input" min="1" value="1" required>
+                <input type="number" name="jumlah[]" class="jumlah-input" placeholder="Jumlah" required min="1" oninput="hitungTotal()">
             </div>
         </div>
 
-        <button type="button" id="tambah-produk">Tambah Produk</button><br><br>
-
-        <!-- Total Harga -->
-        <label for="total_harga">Total Harga:</label>
-        <input type="text" id="total_harga" name="total_harga" readonly><br><br>
-
+        <button type="button" onclick="tambahProduk()">Tambah Produk</button>
+        <h3 id="total-harga">Total Harga: Rp0</h3>
         <button type="submit">Simpan</button>
     </form>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const produkContainer = document.getElementById("produk-container");
-        const tambahProdukBtn = document.getElementById("tambah-produk");
-        const totalHargaInput = document.getElementById("total_harga");
-
-        function hitungTotalHarga() {
-            let total = 0;
-            document.querySelectorAll(".produk-item").forEach(item => {
-                const harga = item.querySelector(".produk-select").selectedOptions[0].dataset.harga;
-                const jumlah = item.querySelector(".jumlah-input").value;
-                total += harga * jumlah;
-            });
-            totalHargaInput.value = total.toLocaleString("id-ID", { minimumFractionDigits: 2 });
-        }
-
-        tambahProdukBtn.addEventListener("click", function () {
-            const itemBaru = document.querySelector(".produk-item").cloneNode(true);
-            itemBaru.querySelector(".jumlah-input").value = "1";
-            produkContainer.appendChild(itemBaru);
-        });
-
-        produkContainer.addEventListener("click", function (e) {
-            if (e.target.classList.contains("hapus-produk")) {
-                e.target.parentElement.remove();
-                hitungTotalHarga();
-            }
-        });
-
-        produkContainer.addEventListener("input", function (e) {
-            if (e.target.classList.contains("jumlah-input") || e.target.classList.contains("produk-select")) {
-                hitungTotalHarga();
-            }
-        });
-
-        hitungTotalHarga();
-    });
-</script>
+</body>
+</html>
 @endsection

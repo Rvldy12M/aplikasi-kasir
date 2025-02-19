@@ -1,36 +1,59 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Daftar Penjualan</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detail Penjualan</title>
+</head>
+<body>
+    <h2>Detail Penjualan</h2>
+    <a href="{{ route('penjualan.index') }}">Kembali</a>
+    <br><br>
+    <table border="1">
+        <tr>
+            <th>ID Penjualan</th>
+            <td>{{ $penjualan->id }}</td>
+        </tr>
+        <tr>
+            <th>Tanggal</th>
+            <td>{{ $penjualan->tanggal_penjualan }}</td>
+        </tr>
+        <tr>
+            <th>ID Pelanggan</th>
+            <td>{{ $penjualan->pelanggan_id}}</td>
+        </tr>
+        <tr>
+            <th>Total Harga</th>
+            <td>Rp {{ number_format($penjualan->total_harga, 2) }}</td>
+        </tr>
+    </table>
 
-    @if(session('message'))
-        <div>{{ session('message') }}</div>
-    @endif
-
+    <h3>Detail Produk</h3>
+    @if ($penjualan->detail_penjualan && count($penjualan->detail_penjualan) > 0)
     <table border="1">
         <thead>
             <tr>
-                <th>Produk</th>
+                <th>Nama Produk</th>
                 <th>Jumlah</th>
-                <th>Total Harga</th>
-                <th>Tanggal Penjualan</th>
-                <th>Pelanggan</th>
-                <th>Action</th>
+                <th>Subtotal</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($penjualans as $penjualan)
+            @foreach($penjualan->detail_penjualan as $detail)
                 <tr>
-                    <td>{{ $penjualan->produk->nama_produk }}</td>
-                    <td>{{ $penjualan->jumlah }}</td>
-                    <td>{{ $penjualan->total_harga }}</td>
-                    <td>{{ $penjualan->tanggal_penjualan }}</td>
-                    <td>{{ $penjualan->pelanggan ? $penjualan->pelanggan->nama : 'Pelanggan Umum' }}</td>
-                    <td><a href="{{ route('penjualan.show', $penjualan->id) }}">Lihat Detail</a></td>
+                    <td>{{ $detail->produk->nama_produk ?? 'Produk tidak ditemukan' }}</td>
+                    <td>{{ $detail->jumlah_produk }}</td>
+                    <td>Rp{{ number_format($detail->subtotal, 0, ',', '.') }}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    
-    <a href="{{ route('penjualan.create') }}">Tambah Penjualan</a>
+@else
+    <p>Belum ada detail produk untuk penjualan ini.</p>
+@endif
+
+    <p><strong>Total Harga:</strong> Rp{{ number_format($penjualan->total_harga ?? 0, 0, ',', '.') }}</p>
+</body>
+</html>
 @endsection
