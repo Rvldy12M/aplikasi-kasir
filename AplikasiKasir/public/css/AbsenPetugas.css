@@ -1,0 +1,94 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    background-color: #E3E7F1; /* Warna background utama */
+}
+
+.container {
+    flex: 1;
+    padding: 10px;
+    margin-left: 200px;
+    margin-top: 10px; /* Tambahkan margin agar tidak tertutup navbar */
+    transition: margin-left 0.3s ease;
+}
+
+/* Jika sidebar disembunyikan, konten dan tabel melebar */
+.sidebar.hidden ~ .container {
+    margin-left: 0;
+    max-width: 100%;
+}
+
+/* Table Styles */
+.table-container {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Pusatkan tabel */
+}
+
+.table {
+    width: calc(100% - 220px); /* Atur lebar tabel agar fleksibel */
+    max-width: 1000px; /* Maksimal ukuran tabel */
+    border-collapse: collapse;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 20px; /* Tambahkan margin agar tidak terlalu mepet */
+    transition: width 0.3s ease;
+}
+
+/* Saat sidebar ditutup, tabel melebar */
+.sidebar.hidden ~ .container .table {
+    width: 90%;
+    max-width: 1200px;
+}
+
+.table th, .table td {
+    border: 1px solid #D1D5DB;
+    padding: 10px;
+    text-align: center;
+}
+
+.table th {
+    background-color: #6366F1;
+    color: #FFFFFF;
+}
+
+/* Button Styles */
+.btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-success {
+    background-color: #4CAF50;
+    color: #FFFFFF;
+}
+
+.btn-success:hover {
+    background-color: #388E3C;
+}
+
+.btn-danger {
+    background-color: #E74C3C;
+    color: #FFFFFF;
+}
+
+.btn-danger:hover {
+    background-color: #C0392B;
+}
+
+.btn-warning {
+    background-color: #F39C12;
+    color: #FFFFFF;
+}
+
+.btn-warning:hover {
+    background-color: #E67E22;
+}
