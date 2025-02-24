@@ -11,9 +11,16 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\SettingsController;
 
-
 Route::get('/', function () {
     return view('welcome');
+});
+Route::get('/debug', function () {
+    try {
+        $data = DB::table('produks')->count();
+        dd($data); // Debug output
+    } catch (\Exception $e) {
+        dd($e->getMessage()); // Tampilkan error
+    }
 });
 
 // Autentikasi
@@ -52,6 +59,7 @@ Route::post('/register', [AuthController::class, 'register']);
 
     //Route Produk
     Route::resource('produk', ProdukController::class);
+    Route::get('/produk', [ProdukController::class, 'index']);
     Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
     Route::delete('/produk/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
     Route::get('/produk/create', [ProdukController::class, 'create'])->name('produk.create');

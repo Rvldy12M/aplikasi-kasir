@@ -32,7 +32,7 @@ public function show($id)
     public function store(Request $request)
     {
         $request->validate([
-            'produk_id' => 'required|exists:produk,id',
+            'produk_id' => 'required|exists:produks,id',
             'member_id' => 'nullable|exists:members,id',
             'pelanggan_id' => 'nullable|exists:members,id',
             'jumlah' => 'required|integer|min:1',
