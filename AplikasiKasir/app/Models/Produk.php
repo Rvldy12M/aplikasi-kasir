@@ -9,7 +9,7 @@ class Produk extends Model
 {
     use HasFactory;
 
-    protected $table = 'produks'; // Ubah nama tabel menjadi 'produks'
+    protected $table = 'produks';     
     protected $fillable = ['nama_produk', 'harga', 'stok'];
 }
 ?>
