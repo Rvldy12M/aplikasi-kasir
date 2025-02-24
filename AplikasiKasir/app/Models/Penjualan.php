@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,23 +8,25 @@ class Penjualan extends Model
 {
     use HasFactory;
 
+    protected $table = 'penjualans'; // Nama tabel
+
     protected $fillable = [
-        'produk_id', 'member_id', 'pelanggan_id', 'jumlah', 'total_harga', 'tanggal_penjualan'
+        'tanggal_penjualan',
+        'pelanggan_id',
+        'total_harga'
     ];
 
-    public function produk()
-{
-    return $this->belongsTo(Produk::class);
+    // 🔹 Relasi ke DetailPenjualan
+    public function detail_penjualan()
+    {
+        return $this->hasMany(DetailPenjualan::class, 'penjualan_id', 'id');
+    }
+    
+
+    // 🔹 Relasi ke Pelanggan (jika ada)
+    public function pelanggan()
+    {
+        return $this->belongsTo(Pelanggan::class, 'pelanggan_id', 'id');
+    }
 }
 
-public function member()
-{
-    return $this->belongsTo(Member::class, 'member_id');
-}
-
-public function pelanggan()
-{
-    return $this->belongsTo(Member::class, 'pelanggan_id');
-}
-
-}

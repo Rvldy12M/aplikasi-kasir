@@ -71,6 +71,7 @@ Route::post('/register', [AuthController::class, 'register']);
 
     //penjualan
     Route::resource('penjualan', PenjualanController::class);
+    Route::get('/penjualan/{id}', [PenjualanController::class, 'show'])->name('penjualan.show');
     Route::resource('detail-penjualan', DetailPenjualanController::class);
 
 
