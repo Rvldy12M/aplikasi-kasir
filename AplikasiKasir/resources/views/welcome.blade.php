@@ -36,7 +36,7 @@ body::before {
 
 /* Header */
 header {
-    background: rgba(140, 162, 180, 0.9); /* Biru dengan opacity */
+    background:  #1e90ff; /* Biru dengan opacity */
     color: white;
     padding: 1rem 2rem;
     box-shadow: 0 15px 8px rgba(0, 0, 0, 0.1);

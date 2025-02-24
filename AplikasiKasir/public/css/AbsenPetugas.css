@@ -29,8 +29,8 @@ body {
 }
 
 .table {
-    width: calc(100% - 220px); /* Atur lebar tabel agar fleksibel */
-    max-width: 1000px; /* Maksimal ukuran tabel */
+    width: calc(100% - 260px); /* Atur lebar tabel agar fleksibel */
+    max-width: 100%; /* Maksimal ukuran tabel */
     border-collapse: collapse;
     background-color: #FFFFFF;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

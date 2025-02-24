@@ -11,7 +11,9 @@
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <header>
-            <h1>SmartKasir</h1>
+        <img src="{{ asset('uploads/1740360070.png') }}" alt="SmartKasir Logo" class="logo">
+        <h1></h1>
+        <h2 class="user-name">{{ Auth::user()->name }}</h2>
         </header>
         <nav>
             <ul>
