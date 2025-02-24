@@ -8,15 +8,22 @@
         background-color: #f0f8ff;
         margin: 0;
         padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        transition: margin-left 0.3s ease-in-out;
     }
 
     .container {
-        max-width: 1200px;
-        margin: 20px auto;
+        width: 80%;
+        max-width: 800px;
         background: white;
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: all 0.3s ease-in-out;
     }
 
     h3 {
@@ -109,8 +116,30 @@
         background-color: #f2f2f2;
     }
 
-    .d-inline {
-        display: inline;
+    td .btn-container {
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @media (max-width: 1024px) {
+        .container {
+            width: 90%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            width: 95%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            width: 100%;
+            padding: 15px;
+        }
     }
 </style>
 
@@ -139,13 +168,15 @@
             <td>{{ $pelanggan->alamat }}</td>
             <td>{{ $pelanggan->nomor_telepon }}</td>
             <td>
-                <a href="{{ route('pelanggan.show', $pelanggan->id) }}" class="btn btn-info btn-sm">Lihat</a>
-                <a href="{{ route('pelanggan.edit', $pelanggan->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                <form action="{{ route('pelanggan.destroy', $pelanggan->id) }}" method="POST" class="d-inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus pelanggan ini?')">Hapus</button>
-                </form>
+                <div class="btn-container">
+                    <a href="{{ route('pelanggan.show', $pelanggan->id) }}" class="btn btn-info btn-sm">Lihat</a>
+                    <a href="{{ route('pelanggan.edit', $pelanggan->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{{ route('pelanggan.destroy', $pelanggan->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus pelanggan ini?')">Hapus</button>
+                    </form>
+                </div>
             </td>
         </tr>
         @endforeach

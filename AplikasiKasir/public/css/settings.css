@@ -99,7 +99,7 @@ input[type="file"] {
 }
 
 /* Profile Image */
-img {
+.profile {
     display: block;
     margin: 10px auto;
     border-radius: 50%;
