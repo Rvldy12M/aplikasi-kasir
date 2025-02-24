@@ -5,7 +5,6 @@ body {
     padding: 0;
 }
 
-<<<<<<< HEAD
 /* Sidebar Styles */
 .sidebar {
     width: 255px;
@@ -44,27 +43,11 @@ body {
 
 .sidebar h1 {
     font-size: 32px;
-=======
-/* Container utama dashboard */
-.dashboard-container {
-    transition: margin-left 0.3s ease-in-out;
-    padding: 20px;
-    width: calc(100% - 220px); /* Default: Sidebar terbuka */
-    margin-left: 220px;
-    position: relative;
-}
-
-/* Tulisan "Hello, Username" ditempelkan ke sidebar */
-.dashboard-header {
-    font-size: 24px;
-    font-weight: bold;
->>>>>>> bf50798877dbb86718492e2429a78cf05457512d
     margin-bottom: 10px;
     padding-left: 0px; /* Tempelkan ke sidebar */
     color: #333;
 }
 
-<<<<<<< HEAD
 .sidebar h2 {
     font-size: 24px;
     margin-bottom: 20px;
@@ -88,10 +71,6 @@ body {
 .nav-links a {
     text-decoration: none;
     color: #2C3E50;
-=======
-/* Agar tabel MENEMPEL ke sidebar */
-.dashboard-tables {
->>>>>>> bf50798877dbb86718492e2429a78cf05457512d
     display: flex;
     justify-content: flex-start; /* Sejajar sidebar */
     gap: 10px; /* Kurangi jarak antar tabel */
