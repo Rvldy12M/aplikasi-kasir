@@ -1,116 +1,101 @@
-/* Global Styles */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    display: flex;
-    background-color: #E3E7F1; /* Warna background utama */
 }
 
-/* Sidebar Styles */
-.sidebar {
-    width: 250px;
-    background-color: #FFFFFF; /* Warna sidebar */
-    color: #2C3E50;
+/* Container utama dashboard */
+.dashboard-container {
+    transition: margin-left 0.3s ease-in-out;
     padding: 20px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-right: 2px solid #D1D5DB;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    width: calc(100% - 220px); /* Default: Sidebar terbuka */
+    margin-left: 220px;
+    position: relative;
 }
 
-.sidebar.hidden {
-    transform: translateX(-100%);
-}
-
-/* Tombol Toggle Sidebar */
-.sidebar-toggle {
-    position: absolute;
-    top: 20px;
-    left: 260px;
-    background-color: #6366F1; /* Warna ungu tombol toggle */
-    color: #FFFFFF;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background 0.3s;
-}
-
-.sidebar-toggle:hover {
-    background-color: #4F46E5;
-}
-
-.sidebar h1 {
+/* Tulisan "Hello, Username" ditempelkan ke sidebar */
+.dashboard-header {
     font-size: 24px;
+    font-weight: bold;
     margin-bottom: 10px;
-    color: #2C3E50;
+    padding-left: 0px; /* Tempelkan ke sidebar */
+    color: #333;
 }
 
-.sidebar h2 {
-    font-size: 18px;
-    margin-bottom: 20px;
-    color: #2C3E50;
-}
-
-.nav-links {
-    list-style: none;
-    padding: 0;
-    width: 100%;
-}
-
-.nav-links li {
-    width: 100%;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-    transition: background 0.3s;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #2C3E50;
+/* Agar tabel MENEMPEL ke sidebar */
+.dashboard-tables {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    font-size: 16px;
-    font-weight: 500;
+    justify-content: flex-start; /* Sejajar sidebar */
+    gap: 10px; /* Kurangi jarak antar tabel */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    align-items: flex-start;
+    margin-top: 0;
+    padding-left: 0px; /* Tempelkan ke sidebar */
 }
 
-.nav-links li:hover {
-    background-color: #6366F1; /* Warna hover sesuai gambar */
-    color: #FFFFFF;
+/* Kotak tabel */
+.dashboard-table {
+    border-collapse: collapse;
+    width: 250px;
+    background-color: white;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-.nav-links li:hover a {
-    color: #FFFFFF;
-}
-
-/* Main Content Styles */
-.main-content {
-    flex: 1;
-    padding: 20px;
-}
-
-/* Dashboard Menu */
-.dashboard-menu {
-    display: flex;
-    gap: 15px;
-}
-
-.dashboard-menu a {
+/* Header tabel */
+.dashboard-table th {
     background-color: #6366F1;
-    color: #FFFFFF;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background 0.3s;
+    color: white;
+    padding: 15px;
+    font-size: 18px;
 }
 
-.dashboard-menu a:hover {
-    background-color: #4F46E5;
+/* Isi tabel */
+.dashboard-table td {
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    border-top: 1px solid #ddd;
+}
+
+/* Jika sidebar ditutup, semua elemen tetap menempel */
+.sidebar-collapsed .dashboard-container {
+    width: calc(100% - 60px); /* Sidebar tertutup */
+    margin-left: 60px;
+}
+
+.sidebar-collapsed .dashboard-header {
+    padding-left: 0px; /* Tetap menempel */
+}
+
+.sidebar-collapsed .dashboard-tables {
+    padding-left: 0px; /* Tetap menempel sidebar */
+}
+
+/* Media query untuk layar kecil */
+@media (max-width: 500px) {
+    .dashboard-container {
+        width: 50%;
+        margin-left: 10px;
+    }
+
+    .dashboard-header {
+        text-align: left; /* Tetap ke kiri */
+        padding-left: 0px;
+    }
+
+    .dashboard-tables {
+        flex-wrap: wrap;
+        justify-content: flex-start; /* Tetap sejajar sidebar */
+        align-items: flex-start;
+        gap: 5px; /* Lebih kecil jarak antar tabel */
+    }
+
+    .dashboard-table {
+        width: 100%;
+    }
 }
