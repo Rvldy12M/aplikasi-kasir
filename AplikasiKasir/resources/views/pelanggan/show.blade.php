@@ -37,8 +37,8 @@
     }
 
     th {
-        background-color: #626f78;
-        color: white;
+        background-color: #c7c6c1;
+        color: black;
         text-align: left;
     }
 
