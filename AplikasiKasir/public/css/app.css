@@ -7,8 +7,8 @@ ul {
 
 /* Sidebar */
 .sidebar {
-    width: 255px;
-    background-color: #f3f4f6; /* Warna background lebih soft */
+    width: 220px; /* Lebih kecil agar tidak terlalu jauh */
+    background-color: #f3f4f6; /* Warna lebih soft */
     color: #2C3E50;
     height: 100vh;
     position: fixed;
@@ -42,11 +42,11 @@ header {
 }
 
 .sidebar ul {
-    padding-left: 20px;
+    padding-left: 15px;
 }
 
 .sidebar ul li {
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .sidebar ul li a {
@@ -73,18 +73,18 @@ header {
     display: flex;
     align-items: center;
     position: fixed;
-    left: 255px;
+    left: 220px; /* Sesuai dengan lebar sidebar */
     top: 0;
     right: 0;
     height: 50px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: left 0.3s ease-in-out, background-color 0.3s;
+    transition: left 0.3s ease-in-out;
 }
 
 /* Navbar menu */
 .navbar-menu {
     display: flex;
-    gap: 25px;
+    gap: 20px;
 }
 
 .navbar-menu a {
@@ -102,17 +102,17 @@ header {
 
 /* Container utama */
 .container {
-    margin-left: 255px;
+    margin-left: 220px; /* Sesuai dengan sidebar */
     margin-top: 60px;
     padding: 20px;
-    width: calc(100% - 255px);
+    width: calc(100% - 220px); /* Sesuaikan agar konten lebih dekat */
     transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
 }
 
 /* Tombol Toggle Sidebar */
 .sidebar-toggle {
     position: fixed;
-    left: 200px;
+    left: 190px; /* Posisikan lebih dekat */
     top: 10px;
     background-color: #4F46E5;
     color: white;
@@ -125,7 +125,7 @@ header {
 
 /* Tombol Logout */
 .btn-logout {
-    background-color: #4F46E5; /* Warna merah untuk logout */
+    background-color: #4F46E5;
     color: white;
     font-size: 16px;
     padding: 8px 15px;
@@ -140,22 +140,22 @@ header {
 }
 
 .btn-logout:hover {
-    background-color: #C0392B; /* Warna lebih gelap saat hover */
+    background-color: #C0392B;
     transform: scale(1.05);
 }
 
-/* Sembunyikan sidebar */
+/* Jika sidebar disembunyikan */
 .sidebar.hidden {
-    left: -255px;
+    left: -220px;
 }
 
-/* Jika sidebar disembunyikan, navbar menyesuaikan */
+/* Navbar menyesuaikan jika sidebar disembunyikan */
 .sidebar.hidden ~ .navbar {
     left: 0;
 }
 
-/* Jika sidebar disembunyikan, konten utama melebar */
+/* Jika sidebar disembunyikan, konten utama lebih dekat ke kiri */
 .sidebar.hidden ~ .container {
-    margin-left: 0;
-    width: 100%;
+    margin-left: 10px;
+    width: calc(100% - 10px);
 }

@@ -1,19 +1,54 @@
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
-    <script>
-
-
-</script>
-
-</head>
-<body>
 @extends('layouts.app')
+
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+
+<div class="container">
+    
+<div class="dashboard-header">
+    Hello, {{ Auth::user()->name }}
+</div>
 
 
-</body>
+    <div class="dashboard-tables">
+        <table class="dashboard-table">
+            <thead>
+                <tr>
+                    <th>Total Penjualan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Rp {{ number_format($totalSales, 0, ',', '.') }}</td>
+                </tr>
+            </tbody>
+        </table>
 
+        <table class="dashboard-table">
+            <thead>
+                <tr>
+                    <th>Total Orders</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ $totalOrders }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="dashboard-table">
+            <thead>
+                <tr>
+                    <th>Total Produk</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ $totalProducts }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+@endsection

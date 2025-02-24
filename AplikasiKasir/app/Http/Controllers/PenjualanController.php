@@ -27,12 +27,20 @@ class PenjualanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+<<<<<<< HEAD
             'tanggal_penjualan' => 'required|date',
             'pelanggan_id' => 'nullable|exists:pelanggans,id',
             'produk_id' => 'required|array',
             'jumlah' => 'required|array',
             'produk_id.*' => 'exists:produks,id',
             'jumlah.*' => 'integer|min:1',
+=======
+            'produk_id' => 'required|exists:produks,id',
+            'member_id' => 'nullable|exists:members,id',
+            'pelanggan_id' => 'nullable|exists:members,id',
+            'jumlah' => 'required|integer|min:1',
+            'tanggal_penjualan' => 'required|date', // Validasi tanggal
+>>>>>>> bf50798877dbb86718492e2429a78cf05457512d
         ]);
     
         // Gunakan NULL jika pelanggan tidak dipilih

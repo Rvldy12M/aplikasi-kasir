@@ -88,6 +88,8 @@
 <div class="container">
     <h2>Daftar Produk</h2>
 
+
+
     @if(Auth::user()->role === 'admin')
         <a href="{{ route('produk.create') }}" class="btn btn-primary">Tambah Produk</a>
     @endif
