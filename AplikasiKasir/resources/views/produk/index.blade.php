@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -13,7 +12,7 @@
     .container {
         max-width: 900px;
         margin: 20px auto;
-        background: white;
+        background: #ffffff;
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -21,13 +20,13 @@
 
     h2 {
         text-align: center;
-        color: #6366F1;
+        color: #004aad;
         margin-bottom: 20px;
     }
 
     .btn {
         display: inline-block;
-        padding: 10px 15px;
+        padding: 8px 12px;
         border-radius: 5px;
         text-decoration: none;
         font-weight: bold;
@@ -37,12 +36,12 @@
     }
 
     .btn-primary {
-        background: #6366F1;
+        background: #004aad;
         color: white;
     }
 
     .btn-primary:hover {
-        background: #4f51d1;
+        background: #00307a;
     }
 
     .btn-danger {
@@ -51,7 +50,13 @@
     }
 
     .btn-danger:hover {
-        background: #c82333;
+        background: #b52a37;
+    }
+
+    .btn-container {
+        display: flex;
+        gap: 5px;
+        justify-content: center;
     }
 
     table {
@@ -67,37 +72,50 @@
     }
 
     th {
-        background: #6366F1;
+        background: #004aad;
         color: white;
     }
 
     tr:nth-child(even) {
-        background: #f9f9f9;
+        background: #e3f2fd;
     }
 
     tr:hover {
-        background: #eceefe;
+        background: #bbdefb;
     }
 
     form {
         display: inline-block;
         margin: 0;
     }
+
+    .alert {
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+        text-align: center;
+    }
 </style>
 
 <div class="container">
     <h2>Daftar Produk</h2>
 
-
-
+    <!-- Tombol Tambah Produk -->
     @if(Auth::user()->role === 'admin')
-        <a href="{{ route('produk.create') }}" class="btn btn-primary">Tambah Produk</a>
+        <div style="text-align: right; margin-bottom: 10px;">
+            <a href="{{ route('produk.create') }}" class="btn btn-primary">+ Tambah Produk</a>
+        </div>
     @endif
 
+    <!-- Notifikasi pesan sukses -->
     @if(session('message'))
-        <div class="alert alert-success">{{ session('message') }}</div>
+        <div class="alert">{{ session('message') }}</div>
     @endif
 
+    <!-- Tabel Produk -->
     <table>
         <thead>
             <tr>
@@ -115,10 +133,10 @@
                 <td>{{ $product->nama_produk }}</td>
                 <td>Rp{{ number_format($product->harga, 0, ',', '.') }}</td>
                 <td>{{ $product->stok }}</td>
-                <td>
+                <td class="btn-container">
                     <a href="{{ route('produk.edit', $product->id) }}" class="btn btn-primary">Edit</a>
                     @if(Auth::user()->role === 'admin')
-                    <form action="{{ route('produk.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Yakin hapus?')">
+                    <form action="{{ route('produk.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Yakin hapus produk ini?')">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Hapus</button>
@@ -129,6 +147,7 @@
             @endforeach
         </tbody>
     </table>
+
 </div>
 
 @endsection

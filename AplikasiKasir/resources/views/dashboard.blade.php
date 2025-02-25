@@ -6,7 +6,6 @@
 <div class="container">
     
 <div class="dashboard-header">
-    Hello, {{ Auth::user()->name }}
 </div>
 
 

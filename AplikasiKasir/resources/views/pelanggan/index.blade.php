@@ -12,18 +12,20 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
-        transition: margin-left 0.3s ease-in-out;
     }
 
-    .container {
-        width: 80%;
-        max-width: 800px;
+    /* Ganti container agar tidak bertumpuk */
+    .custom-container {
+        width: 90%;
+        max-width: 950px;
+        margin: 90px auto 30px auto;
         background: white;
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         text-align: center;
         transition: all 0.3s ease-in-out;
+        overflow-x: auto; /* Supaya bisa di-scroll kalau tabel lebar */
     }
 
     h3 {
@@ -34,7 +36,7 @@
 
     .btn {
         display: inline-block;
-        padding: 10px 15px;
+        padding: 8px 12px;
         border-radius: 5px;
         text-decoration: none;
         font-weight: bold;
@@ -96,15 +98,15 @@
         background: white;
         border-radius: 10px;
         overflow: hidden;
-    }
-
-    table, th, td {
-        border: 1px solid #ddd;
+        table-layout: fixed; /* Supaya tabel tidak keluar */
     }
 
     th, td {
-        padding: 12px;
+        padding: 8px;
         text-align: center;
+        font-size: 14px;
+        word-wrap: break-word;
+        white-space: normal;
     }
 
     th {
@@ -118,35 +120,55 @@
 
     td .btn-container {
         display: flex;
-        gap: 5px;
+        gap: 3px;
         justify-content: center;
         align-items: center;
     }
 
     @media (max-width: 1024px) {
-        .container {
+        .custom-container {
             width: 90%;
         }
     }
 
     @media (max-width: 768px) {
-        .container {
+        .custom-container {
             width: 95%;
+        }
+
+        th, td {
+            font-size: 13px;
+            padding: 6px;
         }
     }
 
     @media (max-width: 480px) {
-        .container {
-            width: 100%;
+        .custom-container {
+            width: 98%;
             padding: 15px;
+        }
+
+        table {
+            display: block;
+            overflow-x: auto;
+        }
+
+        th, td {
+            font-size: 12px;
+            padding: 5px;
+        }
+
+        .btn {
+            padding: 6px 10px;
+            font-size: 12px;
         }
     }
 </style>
 
-<div class="container">
+<div class="custom-container">
     <h3>Daftar Pelanggan</h3>
 
-    <a href="{{ route('pelanggan.create') }}" class="btn btn-primary">Tambah Pelanggan</a>
+    <a href="{{ route('pelanggan.create') }}" class="btn btn-primary">+ Tambah Pelanggan</a>
 
     @if(session('message'))
     <p class="alert alert-success">{{ session('message') }}</p>
@@ -155,9 +177,9 @@
     <table>
         <tr>
             <th>ID</th>
-            <th>Nama Pelanggan</th>
+            <th>Nama</th>
             <th>Alamat</th>
-            <th>Nomor Telepon</th>
+            <th>No. Telepon</th>
             <th>Aksi</th>
         </tr>
 
@@ -174,7 +196,7 @@
                     <form action="{{ route('pelanggan.destroy', $pelanggan->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus pelanggan ini?')">Hapus</button>
+                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                     </form>
                 </div>
             </td>

@@ -1,81 +1,87 @@
 @extends('layouts.app')
 
 @section('content')
-
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f8ff;
-        margin: 0;
-        padding: 0;
-    }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    margin: 0;
+    padding: 0;
+}
 
-    .container {
-        max-width: 800px;
-        margin: 20px auto;
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+.container {
+    max-width: 800px;
+    margin: 80px auto 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-x: auto; /* Supaya bisa di-scroll jika tabel terlalu lebar */
+}
 
-    h2, h3 {
-        text-align: center;
-        color: #6366F1;
-        margin-bottom: 20px;
-    }
+h2, h3 {
+    text-align: center;
+    color: #6366F1; /* Warna utama */
+    margin-bottom: 20px;
+}
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
-    }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
 
-    th, td {
-        padding: 10px;
-        border: 1px solid #ddd;
-    }
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
 
-    th {
-        background-color: #c7c6c1;
-        color: black;
-        text-align: left;
-    }
+th {
+    background-color: #6366F1; /* Warna utama */
+    color: white;
+}
 
-    td {
-        background-color: #f9f9f9;
-    }
+td {
+    background-color: #f9f9f9;
+}
 
-    .btn-back {
-        display: block;
-        text-align: center;
-        background: #6366F1;
-        color: white;
-        padding: 10px;
-        border-radius: 5px;
-        text-decoration: none;
-        font-weight: bold;
-        transition: 0.3s;
-        width: 100%;
-        margin-top: 15px;
-    }
+tr:nth-child(even) {
+    background-color: #e6e8ff; /* Warna lebih soft agar bergantian */
+}
 
-    .btn-back:hover {
-        background: #4f51c5;
-    }
+.btn-back {
+    display: block;
+    text-align: center;
+    background: #6366F1;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    width: 100%;
+    margin-top: 15px;
+}
 
-    p {
-        font-size: 18px;
-        text-align: center;
-        font-weight: bold;
-        margin-top: 10px;
-    }
+.btn-back:hover {
+    background: #4f51c5;
+}
+
+p {
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #333; /* Warna teks yang lebih netral */
+}
 </style>
 
 <div class="container">
     <h2>Detail Penjualan</h2>
-    <a href="{{ route('penjualan.index') }}" class="btn-back">Kembali</a>
-
     <table>
         <tr><th>ID Penjualan</th><td>{{ $penjualan->id }}</td></tr>
         <tr><th>Tanggal</th><td>{{ $penjualan->tanggal_penjualan }}</td></tr>
@@ -108,6 +114,7 @@
     @endif
 
     <p><strong>Total Harga:</strong> Rp{{ number_format($penjualan->total_harga ?? 0, 0, ',', '.') }}</p>
+    <a href="{{ route('penjualan.index') }}" class="btn-back">Kembali</a>
 </div>
 
 @endsection

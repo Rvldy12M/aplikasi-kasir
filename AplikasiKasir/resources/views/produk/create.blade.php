@@ -3,7 +3,7 @@
 @section('content')
 
 <style>
-    body {
+        body {
         font-family: Arial, sans-serif;
         background-color: #f0f8ff;
         margin: 0;
@@ -11,9 +11,8 @@
     }
 
     .container {
-        max-width: 600px;
-        margin: 20px auto;
-        background: white;
+        max-width: 500px;
+        margin: 80px auto 20px auto;        background: #ffffff;
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -21,110 +20,61 @@
 
     h2 {
         text-align: center;
-        color: #6366F1;
+        color: #004aad;
         margin-bottom: 20px;
     }
 
-    .card {
-        background: #ffffff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-    }
-
-    th, td {
-        padding: 10px;
-        text-align: left;
-    }
-
-    th {
-        width: 30%;
+    label {
         font-weight: bold;
+        color: #004aad;
+        display: block;
+        margin-top: 10px;
     }
 
     input {
         width: 100%;
         padding: 8px;
+        margin-top: 5px;
         border: 1px solid #ddd;
         border-radius: 5px;
-        outline: none;
+        font-size: 16px;
     }
 
-    input:focus {
-        border-color: #6366F1;
-        box-shadow: 0 0 5px rgba(99, 102, 241, 0.5);
-    }
-
-    .btn {
-        display: inline-block;
-        padding: 10px 15px;
-        border-radius: 5px;
-        text-decoration: none;
-        font-weight: bold;
-        transition: 0.3s;
+    button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
         border: none;
-        cursor: pointer;
-    }
-
-    .btn-primary {
-        background: #6366F1;
+        border-radius: 5px;
+        background: #004aad;
         color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
     }
 
-    .btn-primary:hover {
-        background: #4f51d1;
-    }
-
-    .btn-secondary {
-        background: #ddd;
-        color: black;
-    }
-
-    .btn-secondary:hover {
-        background: #bbb;
-    }
-
-    .text-center {
-        text-align: center;
+    button:hover {
+        background: #00307a;
     }
 </style>
 
 <div class="container">
     <h2>Tambah Produk</h2>
 
-    <div class="card">
-        <div class="card-body">
-            <form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf 
+    <form action="{{ route('produk.store') }}" method="POST">
+        @csrf
+        <label>Nama Produk:</label>
+        <input type="text" name="nama_produk" required>
 
-                <table>
-                    <tr>
-                        <th><label for="nama_produk">Nama Produk</label></th>
-                        <td><input type="text" name="nama_produk" id="nama_produk" required></td>
-                    </tr>
-                    <tr>
-                        <th><label for="harga">Harga</label></th>
-                        <td><input type="number" name="harga" id="harga" required></td>
-                    </tr>
-                    <tr>
-                        <th><label for="stok">Stok</label></th>
-                        <td><input type="number" name="stok" id="stok" required></td>
-                    </tr>
-                </table>
+        <label>Harga:</label>
+        <input type="number" name="harga" required>
 
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                    <a href="{{ route('produk.index') }}" class="btn btn-secondary">Batal</a>
-                </div>
-            </form>
-        </div>
-    </div>
+        <label>Stok:</label>
+        <input type="number" name="stok" required>
+
+        <button type="submit" class="btn btn-primary">Simpan</button>
+    </form>
 </div>
 
 @endsection

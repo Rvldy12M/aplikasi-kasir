@@ -1,10 +1,11 @@
+
 /* Global Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
-    background-color: #E3E7F1; /* Warna background utama */
+    background-color: #FFFFFF; /* Warna background utama */
 }
 
 .container {
@@ -59,7 +60,7 @@ body {
 
 /* Button Styles */
 .btn {
-    padding: 8px 12px;
+    padding: 8px 5px;
     border: none;
     border-radius: 5px;
     cursor: pointer;

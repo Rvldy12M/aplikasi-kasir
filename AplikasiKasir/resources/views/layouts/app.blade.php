@@ -14,12 +14,13 @@
         <img src="{{ asset('uploads/1740360070.png') }}" alt="SmartKasir Logo" class="logo">
         <h1></h1>
         <h2 class="user-name">{{ Auth::user()->name }}</h2>
+        <br>
         </header>
         <nav>
             <ul>
                 <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                 <li><a href="{{ route('AbsenPetugas') }}">Absen Petugas</a></li>
-                <li><a href="{{ route('settings') }}">Setting</a></li>
+                <li><a href="{{ route('settings') }}">Settings</a></li>
                 <li>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
@@ -49,33 +50,30 @@
         </main>
     </div>
 
-    <!-- JavaScript untuk Toggle Sidebar -->
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    const sidebar = document.querySelector(".sidebar");
-    const mainContent = document.querySelector(".main-content");
-    const toggleButton = document.createElement("button");
+document.addEventListener("DOMContentLoaded", function () {
+    const sidebar = document.querySelector("#sidebar");
+    const mainContent = document.querySelector("#mainContent");
     const navbar = document.querySelector(".navbar");
-    
-    toggleButton.innerText = "☰";
-    toggleButton.classList.add("sidebar-toggle");
-    document.body.appendChild(toggleButton);
-    
-    toggleButton.addEventListener("click", function() {
+    const toggleButton = document.querySelector("#toggleSidebar");
+
+    toggleButton.addEventListener("click", function () {
         sidebar.classList.toggle("hidden");
-        
+
         if (sidebar.classList.contains("hidden")) {
-            toggleButton.style.left = "10px"; // Pindah tombol ke kiri
-            mainContent.style.marginLeft = "0"; // Atur ulang margin konten utama
-            navbar.style.marginLeft = "10"; // Tempelkan navbar dengan sidebar
+            // Sidebar disembunyikan
+            toggleButton.style.left = "10px"; // Geser tombol ke kiri
+            mainContent.style.marginLeft = "0"; // Hilangkan margin konten utama
+            navbar.style.marginLeft = "0"; // Sesuaikan navbar
         } else {
-            toggleButton.style.left = "200px"; // Kembali ke posisi awal
-            mainContent.style.marginLeft = "100px"; // Sesuaikan dengan sidebar
-            navbar.style.marginLeft = "80px"; // Sesuaikan navbar dengan sidebar
+            // Sidebar ditampilkan
+            toggleButton.style.left = "200px"; // Geser tombol ke kanan sesuai lebar sidebar
+            mainContent.style.marginLeft = "220px"; // Sesuaikan margin konten utama
+            navbar.style.marginLeft = "220px"; // Sesuaikan navbar dengan sidebar
         }
     });
 });
-
 </script>
+
 </body>
 </html>

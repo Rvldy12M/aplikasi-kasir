@@ -3,7 +3,7 @@
 @section('content')
 
 <style>
-    body {
+        body {
         font-family: Arial, sans-serif;
         background-color: #f0f8ff;
         margin: 0;
@@ -12,8 +12,8 @@
 
     .container {
         max-width: 600px;
-        margin: 20px auto;
-        background: white;
+        margin: 80px auto 20px auto;
+        background: #ffffff;
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -21,102 +21,67 @@
 
     h2 {
         text-align: center;
-        color: #6366F1;
-        margin-bottom: 20px;
-    }
-
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
+        color: #004aad;
     }
 
     label {
         font-weight: bold;
-        margin-bottom: 5px;
+        color: #004aad;
+        display: block;
+        margin-top: 10px;
     }
 
-    input, select {
+    select, input {
         width: 100%;
-        padding: 10px;
+        padding: 8px;
+        margin-top: 5px;
         border: 1px solid #ddd;
         border-radius: 5px;
-        outline: none;
-    }
-
-    input:focus, select:focus {
-        border-color: #6366F1;
-        box-shadow: 0 0 5px rgba(99, 102, 241, 0.5);
+        font-size: 16px;
     }
 
     .produk-item {
         display: flex;
-        align-items: center;
         gap: 10px;
-        margin-bottom: 10px;
+        align-items: center;
+        margin-top: 10px;
     }
 
-    .produk-item select, .produk-item input {
-        flex: 1;
-    }
-
-    .produk-item button {
-        background: #ff4d4d;
-        color: white;
+    button {
+        padding: 8px;
         border: none;
-        padding: 8px 12px;
         border-radius: 5px;
         cursor: pointer;
     }
 
-    .produk-item button:hover {
-        background: #d43f3f;
+    .btn-secondary {
+        background: #007bff;
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background: #0056b3;
+    }
+
+    .btn-danger {
+        background: #dc3545;
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background: #b02a37;
     }
 
     #total-harga {
         text-align: center;
-        font-size: 18px;
+        margin-top: 15px;
         font-weight: bold;
-        color: #333;
-    }
-
-    .btn {
-        display: inline-block;
-        padding: 10px 15px;
-        border-radius: 5px;
-        text-decoration: none;
-        font-weight: bold;
-        transition: 0.3s;
-        border: none;
-        cursor: pointer;
-        text-align: center;
-    }
-
-    .btn-primary {
-        background: #6366F1;
-        color: white;
-    }
-
-    .btn-primary:hover {
-        background: #4f51d1;
-    }
-
-    .btn-secondary {
-        background: #ddd;
-        color: black;
-    }
-
-    .btn-secondary:hover {
-        background: #bbb;
-    }
-
-    .text-center {
-        text-align: center;
+        color: #004aad;
     }
 </style>
 
 <div class="container">
-    <h2>Tambah Penjualan</h2>
+    <h2> Tambah Penjualan</h2>
 
     <form action="{{ route('penjualan.store') }}" method="POST">
         @csrf
@@ -138,11 +103,11 @@
                 <select name="produk_id[]" class="produk-select" onchange="hitungTotal()" required>
                     <option value="">-- Pilih Produk --</option>
                     @foreach($produk as $p)
-                        <option value="{{ $p->id }}" data-harga="{{ $p->harga }}">{{ $p->nama_produk }}</option>
+                        <option value="{{ $p->id }}" data-harga="{{ $p->harga }}">{{ $p->nama_produk }} - Rp{{ number_format($p->harga, 0, ',', '.') }}</option>
                     @endforeach
                 </select>
                 <input type="number" name="jumlah[]" class="jumlah-input" placeholder="Jumlah" required min="1" oninput="hitungTotal()">
-                <button type="button" onclick="this.parentNode.remove(); hitungTotal()">Hapus</button>
+                <button type="button" class="btn btn-danger" onclick="hapusProduk(this)">Hapus</button>
             </div>
         </div>
 
@@ -151,5 +116,45 @@
         <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
 </div>
+
+<script>
+    function tambahProduk() {
+        let produkList = document.getElementById('produk-list');
+        let produkItem = document.createElement('div');
+        produkItem.classList.add('produk-item');
+
+        produkItem.innerHTML = `
+            <select name="produk_id[]" class="produk-select" onchange="hitungTotal()" required>
+                <option value="">-- Pilih Produk --</option>
+                @foreach($produk as $p)
+                    <option value="{{ $p->id }}" data-harga="{{ $p->harga }}">{{ $p->nama_produk }} - Rp{{ number_format($p->harga, 0, ',', '.') }}</option>
+                @endforeach
+            </select>
+            <input type="number" name="jumlah[]" class="jumlah-input" placeholder="Jumlah" required min="1" oninput="hitungTotal()">
+            <button type="button" class="btn btn-danger" onclick="hapusProduk(this)">Hapus</button>
+        `;
+
+        produkList.appendChild(produkItem);
+    }
+
+    function hapusProduk(element) {
+        element.parentNode.remove();
+        hitungTotal();
+    }
+
+    function hitungTotal() {
+        let totalHarga = 0;
+        let produkSelects = document.querySelectorAll('.produk-select');
+        let jumlahInputs = document.querySelectorAll('.jumlah-input');
+
+        produkSelects.forEach((select, index) => {
+            let harga = select.options[select.selectedIndex].dataset.harga || 0;
+            let jumlah = jumlahInputs[index].value || 0;
+            totalHarga += parseInt(harga) * parseInt(jumlah);
+        });
+
+        document.getElementById('total-harga').innerText = "Total Harga: Rp" + totalHarga.toLocaleString('id-ID');
+    }
+</script>
 
 @endsection

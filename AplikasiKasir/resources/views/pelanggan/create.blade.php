@@ -12,7 +12,7 @@
 
     .container {
         max-width: 500px;
-        margin: 20px auto;
+        margin: 80px auto 20px auto;
         background: white;
         padding: 20px;
         border-radius: 10px;

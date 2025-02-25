@@ -12,7 +12,7 @@
 
     .container {
         max-width: 900px;
-        margin: 20px auto;
+        margin: 80px auto 20px auto;        background: #ffffff;
         background: white;
         padding: 20px;
         border-radius: 10px;
@@ -88,7 +88,7 @@
 <div class="container">
     <h2>Daftar Penjualan</h2>
 
-    <a href="{{ route('penjualan.create') }}" class="btn btn-primary">Tambah Penjualan</a>
+    <a href="{{ route('penjualan.create') }}" class="btn btn-primary">+ Tambah Penjualan</a>
 
     <table>
         <thead>

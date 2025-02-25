@@ -1,107 +1,144 @@
 /* Global Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background-color: #F3F4F6;
+    color: #333;
     margin: 0;
     padding: 0;
     display: flex;
-    background-color: #E3E7F1; /* Warna background utama */
+    justify-content: center; /* Pusatkan horizontal */
+    align-items: center; /* Pusatkan vertikal */
+    min-height: 100vh; /* Memastikan form tetap di tengah */
 }
 
-.container {
+/* Sidebar */
+.sidebar.hidden {
+    transform: translateX(-100%);
+}
+
+/* Container utama tetap di tengah */
+.main-content {
     flex: 1;
-    padding: 30px;
-    margin-left: 500px;
-    margin-top: 20px; /* Tambahkan margin agar tidak tertutup navbar */
-    transition: margin-left 0.3s ease;
-    background: #FFFFFF;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: calc(100% - 300px); /* Buat fleksibel saat sidebar ditutup */
-    transition: left 0.3s ease-in-out;
-    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: margin-left 0.3s ease; /* Animasi saat sidebar berubah */
+    width: 100%;
 }
 
-.sidebar.hidden ~ .container {
+/* Jika sidebar disembunyikan, tetap di tengah */
+.sidebar.hidden ~ .main-content {
     margin-left: 0;
-    max-width: 100%; /* Saat sidebar ditutup, gunakan seluruh lebar */
 }
 
-h2, h3 {
-    color: #2C3E50;
+/* Container untuk form settings */
+.settings-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Profile Image */
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 20px;
 }
 
-p {
-    color: #333;
-    font-size: 16px;
-    line-height: 1.5;
+.profile {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #6366F1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
 }
 
-/* Form Styles */
+/* Form Styling */
 form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-label {
-    font-weight: bold;
-    color: #2C3E50;
-}
-
-input[type="password"],
-input[type="file"] {
-    padding: 10px;
-    border: 1px solid #D1D5DB;
-    border-radius: 5px;
     width: 100%;
-    box-sizing: border-box;
-}
-
-/* Form Ganti Password */
-.form-password {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    gap: 15px;
+    text-align: left;
 }
 
+/* Label */
 .form-label {
     font-weight: bold;
     color: #2C3E50;
+    margin-bottom: 5px;
 }
 
+/* Input fields */
 .form-input {
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #D1D5DB;
-    border-radius: 5px;
+    border-radius: 8px;
     width: 100%;
     box-sizing: border-box;
+    font-size: 14px;
 }
 
+/* Button Styles */
 .btn-submit {
     background-color: #6366F1;
     color: white;
     font-weight: bold;
-    padding: 12px 15px;
+    padding: 12px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s;
+    text-align: center;
+    width: 100%;
 }
 
 .btn-submit:hover {
     background-color: #4F46E5;
 }
 
-/* Profile Image */
-.profile {
-    display: block;
-    margin: 10px auto;
-    border-radius: 50%;
-    border: 3px solid #6366F1;
+/* Section Styling */
+.form-section {
+    width: 100%;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #D1D5DB;
+}
+
+.form-section:last-child {
+    border-bottom: none;
+}
+
+/* Upload File Styling */
+input[type="file"] {
+    padding: 10px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #F9FAFB;
+    cursor: pointer;
+}
+
+/* Headings */
+h2, h3 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .settings-container {
+        max-width: 90%;
+        padding: 20px;
+    }
 }
